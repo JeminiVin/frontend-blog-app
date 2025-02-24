@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import API_BASE_URL from "../config";
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -10,7 +11,7 @@ const BlogDetail = () => {
 
   useEffect(() => {
     if (!id) return; 
-    axios.get(`http://localhost:5000/api/blog/${id}`)
+    axios.get(`${API_BASE_URL}/api/blog/${id}`)
     .then(res => setBlog(res.data))
     .catch(err => console.log(err));
 }, [id]);
@@ -20,7 +21,7 @@ const BlogDetail = () => {
   const handleCommentSubmit = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post(`http://localhost:5000/api/blog/${id}/comment`, { text: newComment }, {
+      const response = await axios.post(`${API_BASE_URL}/api/blog/${id}/comment`, { text: newComment }, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setComments([...comments, response.data]);

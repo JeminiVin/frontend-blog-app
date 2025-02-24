@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import API_BASE_URL from "../config";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const SignUp = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post("http://localhost:5000/api/auth/signup", data);
+      await axios.post(`${API_BASE_URL}/api/auth/signup`, data);
       toast.success("User created successfully!");
       navigate("/login");
     } catch (err) {

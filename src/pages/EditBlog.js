@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {toast} from "react-toastify"
+import API_BASE_URL from "../config";
 
 const EditBlog = () => {
   const { id } = useParams();
@@ -11,7 +12,7 @@ const EditBlog = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/blog/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/blog/${id}`);
         setBlog(response.data);
       } catch (error) {
         console.error("Error fetching blog:", error);
@@ -23,7 +24,7 @@ const EditBlog = () => {
   const handleUpdate = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:5000/api/blog/${id}`, blog, {
+      await axios.put(`${API_BASE_URL}/api/blog/${id}`, blog, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate("/");

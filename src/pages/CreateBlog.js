@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {toast} from "react-toastify"
+import API_BASE_URL from "../config";
 
 const CreateBlog = () => {
   const [title, setTitle] = useState("");
@@ -10,7 +11,7 @@ const CreateBlog = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5000/api/blog/create", { title, content }, {
+    axios.post(`${API_BASE_URL}/api/blog/create`, { title, content }, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     })
     .then(() => navigate("/"))

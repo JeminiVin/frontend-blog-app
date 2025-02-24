@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import API_BASE_URL from "../config";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
@@ -11,7 +12,7 @@ const Navbar = () => {
       if (token) {
         try {
           const response = await axios.get(
-            "http://localhost:5000/api/userauth/me",
+            `${API_BASE_URL}/api/userauth/me`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }
